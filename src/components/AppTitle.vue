@@ -1,6 +1,7 @@
 <template>
   <div class="title-container">
     <fast-todo-title-logo class="title-logo" />
+    <span>Your fastest todo application!</span>
   </div>
 </template>
 <script lang="ts">
@@ -16,15 +17,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .title-container {
-  position: absolute;
   display: flex;
+
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  top: 40px;
+  gap: 40px;
+
+  margin-top: 50px;
   width: 100vw;
+
   .title-logo {
-    transform: scale(4) translateX(-3px);
+    transform: scale(4) translateX(-2px);
+  }
+
+  span {
+    font-family: "Noto Sans Display", sans-serif;
+    color: #283593;
   }
 }
 </style>

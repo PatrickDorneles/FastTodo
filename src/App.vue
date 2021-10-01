@@ -1,17 +1,20 @@
 <template>
   <div class="app-container">
     <app-title />
+    <todo-list />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppTitle from "./components/AppTitle.vue";
+import TodoList from "./components/TodoList.vue";
 
 const App = defineComponent({
   name: "App",
   components: {
     AppTitle,
+    TodoList,
   },
 });
 
@@ -20,9 +23,15 @@ export default App;
 
 <style lang="scss" scoped>
 .app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   height: 100vh;
   width: 100vw;
   background-color: #fff8e1;
+
+  gap: 40px;
 }
 </style>
 
