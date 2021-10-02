@@ -6,26 +6,36 @@
         class="insert-task"
         v-model="taskToInsert"
         placeholder="Write your task here"
+        @keydown.enter="addTask"
       />
-      <button class="add-task" v-on:click="addTask">
+      <button class="add-task" @click="addTask">
         <add-task-icon />
       </button>
     </div>
-    <span v-for="task in tasks" :key="task.id">
-      {{ task.name }}
-    </span>
+    <ul class="task-list">
+      <task
+        v-for="task in tasks"
+        :key="task.id"
+        :id="task.id"
+        :name="task.name"
+        :done="task.done"
+        @delete-task="deleteTask"
+        @change-status="changeStatus"
+      />
+    </ul>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import AddTaskIcon from "./svg/AddTaskIcon.vue";
+import Task from "./Task.vue";
 
 export default defineComponent<{
   taskToInsert: string;
   tasks: { id: number; done: boolean; name: string }[];
   taskIndex: number;
 }>({
-  components: { AddTaskIcon },
+  components: { AddTaskIcon, Task },
   data: function () {
     return {
       taskToInsert: "",
@@ -42,6 +52,14 @@ export default defineComponent<{
         name: this.taskToInsert,
       };
       this.tasks.push(taskToAdd);
+      this.taskToInsert = "";
+    },
+    deleteTask(id: number) {
+      this.tasks = this.tasks.filter((task) => task.id !== id);
+    },
+    changeStatus(id: number) {
+      const task = this.tasks.find((task) => task.id === id);
+      if (task) task.done = !task.done;
     },
   },
 });
@@ -68,7 +86,7 @@ export default defineComponent<{
       outline: none;
 
       font-family: "Noto Sans Display", sans-serif;
-      font-size: 1.2em;
+      font-size: 1em;
 
       color: #1565c0;
     }
@@ -86,6 +104,33 @@ export default defineComponent<{
       &:active svg {
         fill: blue;
       }
+    }
+  }
+
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    list-style-type: none;
+    gap: 8px;
+
+    max-height: 50vh;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #fff8e1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #9fa8da;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #5c6bc0;
     }
   }
 }
