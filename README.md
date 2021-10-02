@@ -1,7 +1,9 @@
 ![Fast Todo Logo](./src/assets/logo.png)
 
 A fast todo for web browsing.
-This is a project made for an app idea that you can find in the [App Ideas repository](https://github.com/florinpop17/app-ideas). You can find the specific to-do list app idea [here](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/To-Do-App.md)
+This is a project made for an app idea that you can find in the [App Ideas repository](https://github.com/florinpop17/app-ideas). You can find the specific to-do list app idea [here](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/To-Do-App.md).
+
+You can test it [here](https://fast-todo.vercel.app/).
 
 ## Description
 **Tier:** 2-Intermediate
