@@ -21,6 +21,7 @@
         :done="task.done"
         @delete-task="deleteTask"
         @change-status="changeStatus"
+        @edit-name="editName"
       />
     </ul>
   </div>
@@ -60,6 +61,10 @@ export default defineComponent<{
     changeStatus(id: number) {
       const task = this.tasks.find((task) => task.id === id);
       if (task) task.done = !task.done;
+    },
+    editName(edited: { id: number; name: string }) {
+      const task = this.tasks.find((task) => task.id === edited.id);
+      if (task) task.name = edited.name;
     },
   },
 });
@@ -114,7 +119,7 @@ export default defineComponent<{
     list-style-type: none;
     gap: 8px;
 
-    max-height: 50vh;
+    height: 50vh;
     overflow: auto;
 
     &::-webkit-scrollbar {

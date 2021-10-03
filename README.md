@@ -18,7 +18,7 @@ The classic To-Do application where a user can write down all the things he want
 
 ## Bonus features
 
--   [ ] User can edit a to-do
+-   [x] User can edit a to-do
 -   [ ] User can see a list with all the completed to-do's
 -   [ ] User can see a list with all the active to-do's
 -   [ ] User can see the date when he created the to-do

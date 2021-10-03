@@ -8,18 +8,42 @@
       class="task-name"
       v-bind:class="done ? 'done' : ''"
       @click="changeStatus"
+      v-if="!edit"
     >
       {{ name }}
     </span>
-    <button class="delete" @click="deleteTask"><delete-task-icon /></button>
+    <input
+      class="edit-input"
+      v-if="edit"
+      v-model="editName"
+      v-bind:focus="edit"
+      @keydown.enter="completeEditing"
+    />
+    <button
+      class="edit"
+      v-bind:class="edit ? 'active' : ''"
+      @click="changeEditMode"
+    >
+      <edit-task-icon />
+    </button>
+    <button class="delete" @click="deleteTask">
+      <delete-task-icon />
+    </button>
   </li>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import DeleteTaskIcon from "./svg/DeleteTaskIcon.vue";
+import EditTaskIcon from "./svg/EditTaskIcon.vue";
 export default defineComponent({
-  components: { DeleteTaskIcon },
+  components: { DeleteTaskIcon, EditTaskIcon },
 
+  data: function () {
+    return {
+      edit: false,
+      editName: this.name,
+    };
+  },
   props: {
     id: Number,
     name: String,
@@ -31,6 +55,17 @@ export default defineComponent({
     },
     changeStatus() {
       this.$emit("changeStatus", this.id);
+    },
+    changeEditMode() {
+      this.edit = !this.edit;
+
+      if (this.editName !== this.name) {
+        this.$emit("editName", { id: this.id, name: this.editName });
+      }
+    },
+    completeEditing() {
+      this.$emit("editName", { id: this.id, name: this.editName });
+      this.edit = false;
     },
   },
 });
@@ -103,11 +138,26 @@ li.task-container {
     }
   }
 
-  .delete {
+  .edit-input {
+    flex: 1;
+
+    font-family: "Noto Sans Display", sans-serif;
+    font-size: 1em;
+
+    border: none;
+  }
+
+  button {
     background: none;
     border: none;
 
     cursor: pointer;
+
+    &.active {
+      svg {
+        fill: #43a047;
+      }
+    }
 
     svg {
       fill: #7986cb;

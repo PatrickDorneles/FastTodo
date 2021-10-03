@@ -12,6 +12,13 @@ import TodoList from "./components/TodoList.vue";
 
 const App = defineComponent({
   name: "App",
+  setup() {
+    const todoIndex = localStorage.getItem("todoIndex");
+
+    if (!todoIndex) {
+      localStorage.setItem("todoIndex", "0");
+    }
+  },
   components: {
     AppTitle,
     TodoList,
