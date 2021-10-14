@@ -1,5 +1,7 @@
 ![Fast Todo Logo](./src/assets/logo.png)
 
+[![Vue Badge](https://img.shields.io/badge/-Vue-63B883?style=for-the-badge&logo=Vue.JS&logoColor=white)](https://vuejs.org/)
+
 A fast todo for web browsing.
 This is a project made for an app idea that you can find in the [App Ideas repository](https://github.com/florinpop17/app-ideas). You can find the specific to-do list app idea [here](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/To-Do-App.md).
 
